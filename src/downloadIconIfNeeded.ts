@@ -5,6 +5,8 @@ import fs from "fs";
 
 import axios from "axios";
 
+// vProd
+
 async function downloadIconIfNeeded(iconPath: string, iconName: string) {
   const assetsDir = path.join(process.cwd(), "./assets/icons");
   const outputPath = path.join(
