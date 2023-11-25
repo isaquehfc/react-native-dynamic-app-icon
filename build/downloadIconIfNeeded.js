@@ -11,7 +11,7 @@ const fs_1 = __importDefault(require("fs"));
 const axios_1 = __importDefault(require("axios"));
 async function downloadIconIfNeeded(iconPath, iconName) {
     const assetsDir = path_1.default.join(process.cwd(), "./assets/icons");
-    const outputPath = path_1.default.join(assetsDir, iconName);
+    const outputPath = path_1.default.join(assetsDir, String(iconName.includes(".png") ? iconName : `${iconName}.png`));
     // Verifica se o iconPath é uma URL
     if (iconPath.startsWith("http://") || iconPath.startsWith("https://")) {
         const response = await (0, axios_1.default)({ url: iconPath, responseType: "stream" });
