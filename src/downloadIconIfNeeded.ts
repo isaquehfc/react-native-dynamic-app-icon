@@ -7,7 +7,10 @@ import axios from "axios";
 
 async function downloadIconIfNeeded(iconPath: string, iconName: string) {
   const assetsDir = path.join(process.cwd(), "./assets/icons");
-  const outputPath = path.join(assetsDir, iconName);
+  const outputPath = path.join(
+    assetsDir,
+    String(iconName.includes(".png") ? iconName : `${iconName}.png`)
+  );
 
   // Verifica se o iconPath é uma URL
   if (iconPath.startsWith("http://") || iconPath.startsWith("https://")) {
