@@ -172,7 +172,7 @@ async function iterateIconsAsync({ icons }, callback) {
         const iconName = getIconName(key, size); // Use sua lógica existente para obter o nome do ícone
         await (0, downloadIconIfNeeded_1.downloadIconIfNeeded)(val.image, iconName);
         // Atualize o caminho do ícone para o local onde o arquivo foi salvo
-        val.image = `./assets/icons/${iconName}`;
+        val.image = `./assets/icons/${String(iconName.includes(".png") ? iconName : `${iconName}.png`)}`;
         await callback(key, val, i);
     }
 }
