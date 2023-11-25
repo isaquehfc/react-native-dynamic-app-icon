@@ -9,6 +9,7 @@ const path_1 = __importDefault(require("path"));
 // @ts-ignore
 const fs_1 = __importDefault(require("fs"));
 const axios_1 = __importDefault(require("axios"));
+// vProd
 async function downloadIconIfNeeded(iconPath, iconName) {
     const assetsDir = path_1.default.join(process.cwd(), "./assets/icons");
     const outputPath = path_1.default.join(assetsDir, String(iconName.includes(".png") ? iconName : `${iconName}.png`));
