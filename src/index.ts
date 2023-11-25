@@ -251,7 +251,7 @@ async function iterateIconsAsync(
 
     await downloadIconIfNeeded(val.image, iconName);
     // Atualize o caminho do ícone para o local onde o arquivo foi salvo
-    val.image = `./assets/icones/${iconName}`;
+    val.image = `./assets/icons/${iconName}`;
 
     await callback(key, val, i);
   }
