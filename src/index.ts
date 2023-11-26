@@ -248,12 +248,21 @@ async function iterateIconsAsync(
     const [key, val] = entries[i];
 
     const iconName = getIconName(key, size); // Use sua lógica existente para obter o nome do ícone
+    console.log(`(${i}) old > ${val.image} & ${iconName}`);
 
-    await downloadIconIfNeeded(val.image, iconName);
-    // Atualize o caminho do ícone para o local onde o arquivo foi salvo
-    val.image = `./assets/icons/${String(
-      iconName.includes(".png") ? iconName : `${iconName}.png`
-    )}`;
+    if (
+      String(val.image).startsWith("http://") ||
+      String(val.image).startsWith("https://")
+    ) {
+      await downloadIconIfNeeded(val.image, iconName);
+
+      // Atualize o caminho do ícone para o local onde o arquivo foi salvo
+      val.image = `./assets/icons/${String(
+        iconName.includes(".png") ? iconName : `${iconName}.png`
+      )}`;
+    }
+
+    console.log(`(${i}) new > ${val.image} & ${iconName}`);
 
     await callback(key, val, i);
   }
