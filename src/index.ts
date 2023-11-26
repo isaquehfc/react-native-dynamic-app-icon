@@ -248,7 +248,7 @@ async function iterateIconsAsync(
     const [key, val] = entries[i];
 
     const iconName = getIconName(key, size); // Use sua lógica existente para obter o nome do ícone
-    console.log(`(${i}) old > ${val.image} & ${iconName}`);
+    console.log(`(${i}) old > ${key} & ${val.image} & ${iconName}`);
 
     if (
       String(val.image).startsWith("http://") ||
@@ -262,7 +262,7 @@ async function iterateIconsAsync(
       )}`;
     }
 
-    console.log(`(${i}) new > ${val.image} & ${iconName}`);
+    console.log(`(${i}) new >  ${key} & ${val.image} & ${iconName}`);
 
     await callback(key, val, i);
   }
