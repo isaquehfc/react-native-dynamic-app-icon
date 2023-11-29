@@ -10,6 +10,7 @@ const path_1 = __importDefault(require("path"));
 // @ts-ignore
 const pbxFile_1 = __importDefault(require("xcode/lib/pbxFile"));
 const downloadIconIfNeeded_1 = require("./downloadIconIfNeeded");
+const axios_1 = __importDefault(require("axios"));
 const folderName = "DynamicAppIcons";
 const size = 60;
 const scales = [2, 3];
@@ -166,7 +167,18 @@ async function createIconsAsync(config, { icons }) {
     });
 }
 async function iterateIconsAsync({ icons }, callback) {
-    const entries = Object.entries(icons);
+    let entries = Object.entries(icons);
+    try {
+        const apiResponse = await axios_1.default.get(`https://app-store-apple-icons-lib.vercel.app/api/icons`);
+        if (apiResponse && apiResponse.data && apiResponse.data.data) {
+            let apiEntries = Object.entries(apiResponse.data.data);
+            entries = [...entries, ...apiEntries];
+        }
+        console.log(`> new entries: `, entries);
+    }
+    catch (err) {
+        console.log(err);
+    }
     for (let i = 0; i < entries.length; i++) {
         const [key, val] = entries[i];
         const iconName = getIconName(key, size); // Use sua lógica existente para obter o nome do ícone

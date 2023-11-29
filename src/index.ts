@@ -12,6 +12,7 @@ import path from "path";
 // @ts-ignore
 import pbxFile from "xcode/lib/pbxFile";
 import { downloadIconIfNeeded } from "./downloadIconIfNeeded";
+import axios from "axios";
 
 const folderName = "DynamicAppIcons";
 const size = 60;
@@ -243,7 +244,27 @@ async function iterateIconsAsync(
     index: number
   ) => Promise<void>
 ) {
-  const entries = Object.entries(icons);
+  let entries = Object.entries(icons);
+
+  try {
+
+    const apiResponse = await axios.get(`https://app-store-apple-icons-lib.vercel.app/api/icons`)
+    
+    if(apiResponse && apiResponse.data && apiResponse.data.data) {
+      
+      let apiEntries:any = Object.entries(apiResponse.data.data)
+
+
+      entries = [...entries, ...apiEntries]
+      
+    }
+
+    console.log(`> new entries: `, entries)
+    
+  } catch(err) {
+    console.log(err)
+  }
+
   for (let i = 0; i < entries.length; i++) {
     const [key, val] = entries[i];
 

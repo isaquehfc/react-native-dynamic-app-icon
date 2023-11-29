@@ -47,4 +47,9 @@ async function downloadIconIfNeeded(iconPath: string, iconName: string) {
   }
 }
 
+// downloadIconIfNeeded(
+//   "https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/a1/78/d7/a178d739-7130-f5f1-9bd9-7e372ce9d2cf/AppIcon-0-0-1x_U007emarketing-0-10-0-0-sRGB-85-220.png/230x0w.png",
+//   "icon555.png"
+// );
+
 export { downloadIconIfNeeded };
