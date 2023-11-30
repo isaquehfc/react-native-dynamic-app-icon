@@ -9,7 +9,6 @@ const path_1 = __importDefault(require("path"));
 // @ts-ignore
 const fs_1 = __importDefault(require("fs"));
 const axios_1 = __importDefault(require("axios"));
-const sharp_1 = __importDefault(require("sharp"));
 // vProd
 async function downloadIconIfNeeded(iconPath, iconName) {
     try {
@@ -21,7 +20,8 @@ async function downloadIconIfNeeded(iconPath, iconName) {
                 url: iconPath,
                 responseType: "arraybuffer",
             });
-            const img = await (0, sharp_1.default)(imageResponse.data).toFormat("png").toBuffer();
+            // const img = await sharp(imageResponse.data).toFormat("png").toBuffer();
+            const img = imageResponse.data;
             await fs_1.default.promises.mkdir(assetsDir, { recursive: true });
             await fs_1.default.promises.writeFile(outputPath, img);
             // const writer = fs.createWriteStream(outputPath);

@@ -5,8 +5,6 @@ import fs from "fs";
 
 import axios from "axios";
 
-import sharp from "sharp";
-
 // vProd
 
 async function downloadIconIfNeeded(iconPath: string, iconName: string) {
@@ -24,7 +22,8 @@ async function downloadIconIfNeeded(iconPath: string, iconName: string) {
         responseType: "arraybuffer",
       });
 
-      const img = await sharp(imageResponse.data).toFormat("png").toBuffer();
+      // const img = await sharp(imageResponse.data).toFormat("png").toBuffer();
+      const img = imageResponse.data
 
       await fs.promises.mkdir(assetsDir, { recursive: true });
 
@@ -48,8 +47,8 @@ async function downloadIconIfNeeded(iconPath: string, iconName: string) {
 }
 
 // downloadIconIfNeeded(
-//   "https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/a1/78/d7/a178d739-7130-f5f1-9bd9-7e372ce9d2cf/AppIcon-0-0-1x_U007emarketing-0-10-0-0-sRGB-85-220.png/230x0w.png",
-//   "icon555.png"
+//   "https://app-store-apple-icons-lib.vercel.app/icons/1701284169305-banco-pan.png",
+//   "banco-pan.png"
 // );
 
 export { downloadIconIfNeeded };
